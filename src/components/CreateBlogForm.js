@@ -1,10 +1,11 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import moment from 'moment';
-import { createBlog } from '../actions/blogs';
 
 export class CreateBlogForm extends React.Component {
-    state = {};
+    state = {
+        title: '',
+        body: ''
+    };
     onTitleChange = (e) => {
         const title = e.target.value;
         this.setState(() => ({ title }));
@@ -19,26 +20,23 @@ export class CreateBlogForm extends React.Component {
             this.setState(() => ({ error: 'Please provide blog title and body' }));
         } else {
             this.setState(() => ({ error: '' }));
-            this.props.createBlog({
+            this.props.onSubmit({
                 title: this.state.title,
                 body: this.state.body,
+                author: 'Mirian Okradze',
                 createdAt: moment().valueOf()
             });
         }
     };
     render() {
         return (
-            <form>
-                <input type="text" placeholder="Blog title" onChange={this.onTitleChange} />
-                <textarea placeholder="Blog body" onChange={this.onBodyChange}></textarea>
-                <button onClick={this.onSubmit}>Create Blog</button>
+            <form onSubmit={this.onSubmit}>
+                <input type="text" placeholder="Blog title" value={this.state.title} onChange={this.onTitleChange} />
+                <textarea placeholder="Blog body" value={this.state.body} onChange={this.onBodyChange}></textarea>
+                <button>Create Blog</button>
             </form>
         );
     }
 };
 
-const mapDispatchToProps = (dispatch) => ({
-    createBlog: (blog) => dispatch(createBlog(blog))
-});
-
-export default connect(undefined, mapDispatchToProps)(CreateBlogForm);
+export default CreateBlogForm;

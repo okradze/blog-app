@@ -6,7 +6,7 @@ import selectBlogs from '../selectors/blogs';
 export const BlogList = ({ blogs }) => (
     <div>
         {(
-            blogs.map(blog => <BlogListItem blog={blog} />)
+            blogs.map(blog => <BlogListItem key={blog.id} blog={blog} />)
         )}
     </div>
 );

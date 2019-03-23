@@ -1,18 +1,7 @@
-const blogs = [{
-    title: '1',
-    body: '1',
-    author: Math.random().toString()
-},{
-    title: '2',
-    body: '2',
-    author: Math.random().toString()
-},{
-    title: '3',
-    body: '3',
-    author: Math.random().toString()
-}]
-export default (state = blogs, action) => {
+export default (state = [], action) => {
     switch (action.type) {
+        case 'SET_BLOGS':
+            return action.blogs;
         case 'CREATE_BLOG':
             return [...state, action.blog];
     };
