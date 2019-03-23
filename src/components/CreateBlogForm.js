@@ -3,8 +3,9 @@ import moment from 'moment';
 
 export class CreateBlogForm extends React.Component {
     state = {
-        title: '',
-        body: ''
+        title: this.props.title || '',
+        body: this.props.body || '',
+        createdAt: this.props.createdAt || moment()
     };
     onTitleChange = (e) => {
         const title = e.target.value;
@@ -24,7 +25,7 @@ export class CreateBlogForm extends React.Component {
                 title: this.state.title,
                 body: this.state.body,
                 author: 'Mirian Okradze',
-                createdAt: moment().valueOf()
+                createdAt: this.state.createdAt
             });
         }
     };
@@ -33,7 +34,7 @@ export class CreateBlogForm extends React.Component {
             <form onSubmit={this.onSubmit}>
                 <input type="text" placeholder="Blog title" value={this.state.title} onChange={this.onTitleChange} />
                 <textarea placeholder="Blog body" value={this.state.body} onChange={this.onBodyChange}></textarea>
-                <button>Create Blog</button>
+                <button>Save Blog</button>
             </form>
         );
     }
