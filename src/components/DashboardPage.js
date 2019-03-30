@@ -3,9 +3,11 @@ import BlogFilters from './BlogFilters';
 import BlogList from './BlogList';
 
 export const DashboardPage = () => (
-    <div>
-        <BlogFilters />
-        <BlogList />
+    <div className="flex-1">
+        <div className="container mx-auto mt-24">
+            <BlogFilters />
+            <BlogList />
+        </div>
     </div>
 );
 

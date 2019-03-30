@@ -5,7 +5,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = merge(common, {
     devtool: 'cheap-module-eval-source-map',
-    entry: './src/app.js',
     mode: 'development',
     output: {
         filename: 'bundle.js',
@@ -19,6 +18,7 @@ module.exports = merge(common, {
                 use: [
                     'style-loader',
                     'css-loader',
+                    'postcss-loader',
                     'sass-loader'
                 ]
             },

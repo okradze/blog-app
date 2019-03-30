@@ -1,15 +1,14 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { startLogin } from '../actions/auth';
+import ReadBlogList from '../components/ReadBlogList';
+import Header from '../components/Header';
 
-export const LoginPage = (props) => (
+export const LoginPage = () => (
     <div>
-        <button onClick={props.startLogin}>Login</button>
+        <Header />
+        <div className="container mx-auto">
+            <ReadBlogList />
+        </div>
     </div>
 );
 
-const mapDispatchToProps = (dispatch) => ({
-    startLogin: () => dispatch(startLogin())
-});
-
-export default connect(undefined, mapDispatchToProps)(LoginPage);
+export default LoginPage;

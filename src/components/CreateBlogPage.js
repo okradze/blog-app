@@ -1,20 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import CreateBlogForm from './CreateBlogForm';
 import { startCreateBlog } from '../actions/blogs';
 
-export class CreateBlogPage extends React.Component {
-    onSubmit = (blog) => {
-        this.props.startCreateBlog(blog);
-        this.props.history.push('/dashboard');
+export const CreateBlogPage = props => {
+    const [submitLoading, setSubmitLoading] =  useState(false);
+    const [submitDisabled, setSubmitDisabled] =  useState(false);
+
+    const onSubmit = (blog) => {
+        setSubmitLoading(true);
+        setSubmitDisabled(true);
+        props.startCreateBlog(blog).then(() => {
+            props.history.push('/dashboard');
+        });
     };
-    render() {
-        return (
-            <div>
-                <CreateBlogForm onSubmit={this.onSubmit} />
+    return (
+        <div className="flex-1 z-0">
+            <div className="container mx-auto mt-16">
+                <CreateBlogForm submitDisabled={submitDisabled} submitLoading={submitLoading}onSubmit={onSubmit} />
             </div>
-        );
-    };
+        </div>
+    );
 };
 
 const mapDispatchToProps = (dispatch) => ({

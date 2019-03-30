@@ -10,9 +10,9 @@ export const startLogout = () => {
     }
 }
 
-export const login = (uid) => ({
+export const login = (userInfo) => ({
     type: 'LOGIN',
-    uid
+    userInfo
 });
 
 export const startLogin = () => {

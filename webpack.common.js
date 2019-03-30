@@ -9,6 +9,7 @@ if(process.env.NODE_ENV === 'test'){
 }
 
 module.exports = {
+    entry: ['babel-polyfill', './src/app.js'],
     module: {
         rules: [
             {

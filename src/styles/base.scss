@@ -1,0 +1,35 @@
+html {
+    @media only screen and (max-width: 800px) {
+        font-size: 15px;
+    }
+}
+
+body {
+    @apply .bg-grey-lighter;
+}
+
+.header {
+    min-height: 3.8rem;
+    box-sizing: border-box;
+    top: 0;
+    overflow: hidden;
+
+    &__branding {
+        font-size: 1.7rem;
+    }
+    &__content {
+        height: inherit;
+    }
+}
+
+input::placeholder, textarea::placeholder {
+    color: #444;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}

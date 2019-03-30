@@ -6,7 +6,9 @@ import { firebase } from './firebase/firebase';
 import configureStore from './store/configureStore';
 import { logout, login } from './actions/auth';
 import { startSetBlogs } from './actions/blogs';
-import 'normalize.css/normalize.css';
+import { startFetchBlogs } from './actions/readBlogs';
+import Loader from './components/Loader';
+import 'react-quill/dist/quill.snow.css';
 import './styles/main.scss';
 
 const store = configureStore();
@@ -16,6 +18,7 @@ const jsx = (
     </Provider>
 );
 
+
 let hasRendered = false;
 const render = () => {
     if (!hasRendered) {
@@ -24,19 +27,22 @@ const render = () => {
     }
 };
 
-firebase.auth().onAuthStateChanged((user) => {
+ReactDOM.render(<Loader />, document.getElementById('app'));
+
+firebase.auth().onAuthStateChanged(user => {
     if (user) {
-        store.dispatch(login(user.uid));
+        store.dispatch(login({ uid: user.uid, displayName: user.displayName, photoURL: user.photoURL }));
         store.dispatch(startSetBlogs()).then(() => {
             render();
             if(history.location.pathname === '/') {
                 history.push('/dashboard');
             }
-        })
-        render();
+        });
     } else {
         store.dispatch(logout());
         render();
-        history.push('/');
+        if (!history.location.pathname.match(/^\/read\/.{1,}$/)) {
+            history.push('/');
+        }
     }
 });

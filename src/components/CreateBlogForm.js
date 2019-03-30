@@ -1,43 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
+import Quill from './Quill';
+import loader from '../images/loader.gif';
 
-export class CreateBlogForm extends React.Component {
-    state = {
-        title: this.props.title || '',
-        body: this.props.body || '',
-        createdAt: this.props.createdAt || moment()
+export const CreateBlogForm = props => {
+    const [title, setTitle] = useState(props.title || '');
+    const [body, setBody] = useState(props.body || '');
+    const [createdAt] = useState(props.createdAt || moment().valueOf());
+    const [error, setError] = useState('');
+
+    const onTitleChange = (e) => {
+        setTitle(e.target.value);
     };
-    onTitleChange = (e) => {
-        const title = e.target.value;
-        this.setState(() => ({ title }));
+    const onBodyChange = (e) => {
+        setBody(e.target.value);
     };
-    onBodyChange = (e) => {
-        const body = e.target.value;
-        this.setState(() => ({ body }));
-    };
-    onSubmit = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
-        if(!this.state.title || !this.state.body){
-            this.setState(() => ({ error: 'Please provide blog title and body' }));
+        if (!title || !body) {
+            setError('Please provide blog title and body');
         } else {
-            this.setState(() => ({ error: '' }));
-            this.props.onSubmit({
-                title: this.state.title,
-                body: this.state.body,
-                author: 'Mirian Okradze',
-                createdAt: this.state.createdAt
+            setError('');
+            props.onSubmit({
+                title,
+                body,
+                createdAt
             });
         }
     };
-    render() {
-        return (
-            <form onSubmit={this.onSubmit}>
-                <input type="text" placeholder="Blog title" value={this.state.title} onChange={this.onTitleChange} />
-                <textarea placeholder="Blog body" value={this.state.body} onChange={this.onBodyChange}></textarea>
-                <button>Save Blog</button>
-            </form>
-        );
-    }
+
+    return (
+        <form className="flex flex-col" onSubmit={onSubmit}>
+            {error && <p>{error}</p>}
+            <input type="text" className="px-4 py-2 mt-12 mb-8 rounded-sm" placeholder="Blog title" value={title} onChange={onTitleChange} />
+
+            <Quill body={body} setBody={setBody} />
+            <button className="button flex items-center self-start mt-6" disabled={props.submitDisabled}>
+            
+            {props.submitLoading && <img className="w-4 h-4 mr-2" src={loader} alt="loader" />} Save Blog</button>
+        </form>
+    )
 };
 
 export default CreateBlogForm;

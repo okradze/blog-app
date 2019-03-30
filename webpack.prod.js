@@ -9,7 +9,6 @@ const common = require('./webpack.common');
 const merge = require('webpack-merge');
 
 module.exports = merge(common, {
-    entry: ['babel-polyfill', './src/app.js'],
     mode: 'production',
     output: {
         path: path.join(__dirname, './dist'),
@@ -24,6 +23,7 @@ module.exports = merge(common, {
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader',
+                    'postcss-loader',
                     'sass-loader'
                 ]
             },
@@ -55,7 +55,6 @@ module.exports = merge(common, {
             new TerserPlugin(),
             new HtmlWebpackPlugin({
                 template: './src/template.html',
-                favicon: './images/favicon.png',
                 minify: {
                     removeAttributeQuotes: true,
                     collapseWhitespace: true,

@@ -2,29 +2,29 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { setTitleFilter, searchByAuthor, searchByTitle } from '../actions/filters';
 
-export class BlogFilters extends React.Component {
-    onTitleChange = (e) => {
-        this.props.setTitleFilter(e.target.value);
+export const BlogFilters = (props) => {
+    const onTitleChange = (e) => {
+        props.setTitleFilter(e.target.value);
     };
-    onSortChange = (e) => {
+
+    const onSortChange = (e) => {
         if(e.target.value === 'title') {
-            this.props.searchByTitle();
+            props.searchByTitle();
         } else if (e.target.value === 'author') {
-            this.props.searchByAuthor();
+            props.searchByAuthor();
         }
     };
-    render() {
-        return (
-            <div>
-                <input type="text" placeholder="Search by" value={this.props.filters.title} onChange={this.onTitleChange} />
-                <select value={this.props.filters.searchBy} onChange={this.onSortChange}>
-                    <option value="title">Title</option>
-                    <option value="author">Author</option>
-                </select>
-            </div>
-        );
-    };
-};
+
+    return (
+        <div className="flex items-center">
+            <input type="text" className="py-2 px-4 mr-4 rounded-sm" placeholder="Search by" value={props.filters.title} onChange={onTitleChange} />
+            <select className="py-2 px-4 rounded-sm" value={props.filters.searchBy} onChange={onSortChange}>
+                <option value="title">Title</option>
+                <option value="author">Author</option>
+            </select>
+        </div>
+    );
+}
 
 const mapStateToProps = (state) => ({
     filters: state.filters
