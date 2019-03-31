@@ -6,7 +6,6 @@ import { firebase } from './firebase/firebase';
 import configureStore from './store/configureStore';
 import { logout, login } from './actions/auth';
 import { startSetBlogs } from './actions/blogs';
-import { startFetchBlogs } from './actions/readBlogs';
 import Loader from './components/Loader';
 import 'react-quill/dist/quill.snow.css';
 import './styles/main.scss';
@@ -17,7 +16,6 @@ const jsx = (
         <AppRouter />
     </Provider>
 );
-
 
 let hasRendered = false;
 const render = () => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { setTitleFilter, searchByAuthor, searchByTitle } from '../actions/filters';
 
@@ -14,6 +14,12 @@ export const BlogFilters = (props) => {
             props.searchByAuthor();
         }
     };
+
+    useEffect(() => {
+        return () => {
+            props.setTitleFilter('');
+        }
+    }, [])
 
     return (
         <div className="flex items-center">

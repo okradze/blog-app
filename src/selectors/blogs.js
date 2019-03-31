@@ -10,7 +10,5 @@ export default (blogs, { title, searchBy }) => {
             
             return authorMatch;
         }
-    }).sort((a, b) => {
-        return b.createdAt - a.createdAt;
-    });
+    })
 };

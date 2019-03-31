@@ -6,7 +6,7 @@ import Header from '../components/Header';
 export const PrivateRoute = ({ isAuth, component: Component, ...rest }) => (
     <Route {...rest} component={(props) => (
         isAuth ? (
-            <div className="flex flex-col h-screen bg-grey-lighter">
+            <div className="flex flex-col h-screen mb-6 bg-grey-lighter">
                 <Header />
                 <Component {...props} />
             </div>

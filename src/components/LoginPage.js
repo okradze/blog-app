@@ -5,9 +5,7 @@ import Header from '../components/Header';
 export const LoginPage = () => (
     <div>
         <Header />
-        <div className="container mx-auto">
-            <ReadBlogList />
-        </div>
+        <ReadBlogList />
     </div>
 );
 

@@ -5,13 +5,12 @@ import BlogListItem from './BlogListItem';
 import selectBlogs from '../selectors/blogs';
 
 export const BlogList = ({ blogs }) => (
-    <div className="mt-8 pb-12">
+    <div className="mt-8 pb-12 overflow-y-auto">
         {blogs.length > 0 ? (
             blogs.map(blog => <BlogListItem to={'edit'} key={blog.id} {...blog} />)
         ) : (
             <div className="flex items-center justify-center mt-8">
-                <p className="mr-6 text-lg text-grey-darkest">No Blogs?</p>
-                <Link to='/create' className="button">Create</Link>
+                <p className="text-xl text-grey-darkest">No Blogs</p>
             </div>
         )}
     </div>
