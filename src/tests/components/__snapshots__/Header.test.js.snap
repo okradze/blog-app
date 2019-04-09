@@ -1,0 +1,183 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Header correctly when logged in 1`] = `
+<header
+  className="header"
+>
+  <div
+    className="container header__content"
+  >
+    <div
+      className="mobile-toggle"
+    >
+      <label
+        className="mobile-toggle__label"
+        htmlFor="nav-toggle"
+      >
+        <img
+          alt="Hamburger logo for mobile devices"
+          className="mobile-toggle__hamburger"
+          src={Object {}}
+        />
+      </label>
+      <input
+        className="mobile-toggle__checkbox"
+        id="nav-toggle"
+        type="checkbox"
+      />
+      <nav
+        className="mobile-nav"
+      >
+        <Link
+          className="mobile-nav__link"
+          replace={false}
+          to="/dashboard"
+        >
+          Dashboard
+        </Link>
+        <Link
+          className="mobile-nav__link"
+          replace={false}
+          to="/create"
+        >
+          Create
+        </Link>
+        <Link
+          className="mobile-nav__link"
+          replace={false}
+          to="/read"
+        >
+          Blogs
+        </Link>
+      </nav>
+    </div>
+    <div
+      className="desktop-toggle"
+    >
+      <nav
+        className="nav"
+      >
+        <Link
+          className="nav__link"
+          replace={false}
+          to="/dashboard"
+        >
+          Dashboard
+        </Link>
+        <Link
+          className="nav__link"
+          replace={false}
+          to="/create"
+        >
+          Create
+        </Link>
+        <Link
+          className="nav__link"
+          replace={false}
+          to="/read"
+        >
+          Blogs
+        </Link>
+      </nav>
+      <div
+        className="header__logo"
+      >
+        <Link
+          className="header__logo-text"
+          replace={false}
+          to="/dashboard"
+        >
+          <h1>
+            Blog App
+          </h1>
+        </Link>
+      </div>
+      <div
+        className="header__user"
+      >
+        <img
+          alt="User"
+          className="header__img"
+          src="url"
+        />
+        <button
+          className="button"
+          onClick={[MockFunction]}
+          type="button"
+        >
+          Log Out
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+`;
+
+exports[`should render Header correctly when logged out 1`] = `
+<header
+  className="header"
+>
+  <div
+    className="container header__content"
+  >
+    <div
+      className="mobile-toggle"
+    >
+      <label
+        className="mobile-toggle__label"
+        htmlFor="nav-toggle"
+      >
+        <img
+          alt="Hamburger logo for mobile devices"
+          className="mobile-toggle__hamburger"
+          src={Object {}}
+        />
+      </label>
+      <input
+        className="mobile-toggle__checkbox"
+        id="nav-toggle"
+        type="checkbox"
+      />
+      <nav
+        className="mobile-nav"
+      >
+        <button
+          className="mobile-nav__link"
+          onClick={[MockFunction]}
+          type="button"
+        >
+          Login
+        </button>
+      </nav>
+    </div>
+    <div
+      className="desktop-toggle"
+    >
+      <div
+        className="header__logo"
+      >
+        <Link
+          className="header__logo-text"
+          replace={false}
+          to="/dashboard"
+        >
+          <h1>
+            Blog App
+          </h1>
+        </Link>
+      </div>
+      <div
+        className="header__user"
+      >
+        <button
+          className="button"
+          onClick={[MockFunction]}
+          type="button"
+        >
+          Log In
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+`;

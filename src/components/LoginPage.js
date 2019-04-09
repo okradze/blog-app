@@ -1,12 +1,14 @@
 import React from 'react';
 import ReadBlogList from '../components/ReadBlogList';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 export const LoginPage = () => (
-    <div>
+    <React.Fragment>
         <Header />
         <ReadBlogList />
-    </div>
+        <Footer />
+    </React.Fragment>
 );
 
 export default LoginPage;

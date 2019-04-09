@@ -26,10 +26,13 @@ module.exports = merge(common, {
                 test: /\.(svg|jpg|png|gif|jpeg)$/i,
                 use: [
                     {
-                        loader: 'url-loader'
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]'
                     }
+            }
                 ]
-            },
+            }
         ]
     },
     plugins: [

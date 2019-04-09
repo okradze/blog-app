@@ -1,42 +1,82 @@
 import React from 'react';
-import { startLogout, startLogin } from '../actions/auth';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { startLogout, startLogin } from '../actions/auth';
+import hamburger from '../images/hamburger.svg';
 
-export const Header = (props) => (
-    <header className="flex fixed shadow w-screen bg-white z-10 header box-content">
-        {
-            props.photoURL ? (
-                <div className="flex items-center container mx-auto header__content">
-                    <nav className="w-2/5 flex items-center self-stretch">
-                        <Link className="top-nav-item" to="/dashboard">Dashboard</Link>
-                        <Link className="top-nav-item" to="/create">Create</Link>
-                        <Link className="top-nav-item" to="/read">Blogs</Link>
-                    </nav>
-                    <div className="w-1/5 text-center">
-                        <Link className="text-teal" to='/dashboard'><h1 className="header__branding">Blog App</h1></Link>
-                    </div>
-                    <div className="w-2/5 flex items-center justify-end">
-                        <img className="rounded-full w-auto h-10 cursor-pointer" src={props.photoURL} />
-                        <button onClick={props.startLogout} className="button ml-6">Log Out</button>
-                    </div>
-                </div>
-            ) : (
-                <div className="flex items-center container mx-auto header__content justify-between px-8">
-                    <Link className="text-teal" to='/'><h1 className="header__branding">Blog App</h1></Link>
-                    <button className="button" onClick={props.startLogin}>Log In</button>
-                </div>
-            )
-        }
-    </header>
+export const Header = ({ photoURL, uid, startLogin, startLogout }) => (
+	<header className="header">
+		<div className="container header__content">
+			<div className="mobile-toggle">
+				<label htmlFor="nav-toggle" className="mobile-toggle__label">
+					<img className="mobile-toggle__hamburger" src={hamburger} alt="Hamburger logo for mobile devices" />
+				</label>
+				<input type="checkbox" className="mobile-toggle__checkbox" id="nav-toggle" />
+				<nav className="mobile-nav">
+					{uid ? (
+						<React.Fragment>
+							<Link className="mobile-nav__link" to="/dashboard">
+								Dashboard
+							</Link>
+							<Link className="mobile-nav__link" to="/create">
+								Create
+							</Link>
+							<Link className="mobile-nav__link" to="/read">
+								Blogs
+							</Link>
+						</React.Fragment>
+					) : (
+						<button type="button" onClick={startLogin} className="mobile-nav__link">
+							Login
+						</button>
+					)}
+				</nav>
+			</div>
+			<div className="desktop-toggle">
+				{uid && (
+					<nav className="nav">
+						<Link className="nav__link" to="/dashboard">
+							Dashboard
+						</Link>
+						<Link className="nav__link" to="/create">
+							Create
+						</Link>
+						<Link className="nav__link" to="/read">
+							Blogs
+						</Link>
+					</nav>
+				)}
+				<div className="header__logo">
+					<Link className="header__logo-text" to="/dashboard">
+						<h1>Blog App</h1>
+					</Link>
+				</div>
+				<div className="header__user">
+					{uid ? (
+						<React.Fragment>
+							<img className="header__img" src={photoURL} alt="User" />
+							<button type="button" onClick={startLogout} className="button">
+								Log Out
+							</button>
+						</React.Fragment>
+					) : (
+						<button type="button" className="button" onClick={startLogin}>
+							Log In
+						</button>
+					)}
+				</div>
+			</div>
+		</div>
+	</header>
 );
 
-const mapDispatchToProps = (dispatch) => ({
-    startLogout: () => dispatch(startLogout()),
-    startLogin: () => dispatch(startLogin())
+const mapDispatchToProps = dispatch => ({
+	startLogout: () => dispatch(startLogout()),
+	startLogin: () => dispatch(startLogin()),
 });
-const mapStateToProps = (state) => ({
-    photoURL: state.auth.photoURL
+const mapStateToProps = state => ({
+	photoURL: state.auth.photoURL,
+	uid: state.auth.uid,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

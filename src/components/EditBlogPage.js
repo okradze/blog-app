@@ -3,66 +3,83 @@ import { connect } from 'react-redux';
 import NotFoundPage from './NotFoundPage';
 import CreateBlogForm from './CreateBlogForm';
 import { startRemoveBlog, startEditBlog } from '../actions/blogs';
-import Loader from './Loader';
 import loader from '../images/loader.gif';
+import db from '../firebase/firebase';
 
-export const EditBlogPage = props => {
-    const [removeLoading, setRemoveLoading] = useState(false);
-    const [submitLoading, setSubmitLoading] = useState(false);
-    const [submitDisabled, setSubmitDisabled] = useState(false);
-    const [removeDisabled, setRemoveDisabled] = useState(false);
-    const [loading, setLoading] = useState(true);
+const fetchBlog = async (uid, id) => {
+	const data = await db.collection('users').doc(uid).collection('blogs').doc(id).get();
+	return {
+		id: data.id,
+		...data.data(),
+	};
+};
 
-    useEffect(() => {
-        setLoading(false);
-    }, [props.blog])
+export const EditBlogPage = ({ uid, match, history }) => {
+	const [ removeLoading, setRemoveLoading ] = useState(false);
+	const [ submitLoading, setSubmitLoading ] = useState(false);
+	const [ submitDisabled, setSubmitDisabled ] = useState(false);
+	const [ removeDisabled, setRemoveDisabled ] = useState(false);
+	const [ loading, setLoading ] = useState(true);
+	const [ blog, setBlog ] = useState(null);
 
-    const onRemove = () => {
-        setRemoveLoading(true);
-        setRemoveDisabled(true);
-        setSubmitDisabled(true);
+	useEffect(() => {
+		let didCancel = false;
+		fetchBlog(uid, match.params.id).then(newBlog => {
+			if (!didCancel) {
+				setBlog(newBlog);
+				setLoading(false);
+			}
+		});
+		return () => {
+			didCancel = true;
+		};
+	}, []);
 
-        props.startRemoveBlog(props.blog.id).then(() => {
-            props.history.push('/dashboard');
-        });
-    };
-    const onSubmit = (updates) => {
-        setSubmitDisabled(true);
-        setSubmitLoading(true);
-        setRemoveDisabled(true);
+	const onRemove = () => {
+		setRemoveLoading(true);
+		setRemoveDisabled(true);
+		setSubmitDisabled(true);
 
-        props.startEditBlog(props.blog.id, updates).then(() => {
-            props.history.push('/dashboard');
-        });
-    };
+		startRemoveBlog(uid, blog.id).then(() => {
+			history.push('/dashboard');
+		});
+	};
+	const onSubmit = updates => {
+		setSubmitDisabled(true);
+		setSubmitLoading(true);
+		setRemoveDisabled(true);
 
-    return loading ? (
-        <Loader />
-    ) : (
-            <>
-                {props.blog ? (
-                    <div className="container mx-auto mt-16">
-                        <CreateBlogForm submitLoading={submitLoading} submitDisabled={submitDisabled} {...props.blog} onSubmit={onSubmit}
-                        />
-                        <button
-                            className="button mt-4 bg-grey hover:bg-grey-dark flex items-center"
-                            onClick={onRemove} disabled={removeDisabled}>
-                            {removeLoading && <img className="h-4 w-4 mr-2" src={loader} alt="loader" />} Remove</button>
-                    </div>
-                ) : (
-                        <NotFoundPage />
-                    )}
-            </>
-        )
-}
+		startEditBlog(uid, blog.id, updates).then(() => {
+			history.push('/dashboard');
+		});
+	};
 
-const mapStateToProps = (state, props) => ({
-    blog: state.blogs.find(blog => blog.id === props.match.params.id)
+	return loading ? (
+		<img className="center small-loader" src={loader} alt="Loader" />
+	) : (
+		<React.Fragment>
+			{blog ? (
+				<div className="container">
+					<CreateBlogForm
+						submitLoading={submitLoading}
+						submitDisabled={submitDisabled}
+						{...blog}
+						onSubmit={onSubmit}
+						isEdit={true}
+						removeLoading={removeLoading}
+						removeDisabled={removeDisabled}
+						onRemove={onRemove}
+					/>
+				</div>
+			) : (
+				<NotFoundPage />
+			)}
+		</React.Fragment>
+	);
+};
+
+const mapStateToProps = state => ({
+	uid: state.auth.uid,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    startRemoveBlog: (id) => dispatch(startRemoveBlog(id)),
-    startEditBlog: (id, updates) => dispatch(startEditBlog(id, updates))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(EditBlogPage);
+export default connect(mapStateToProps)(EditBlogPage);

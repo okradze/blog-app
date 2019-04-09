@@ -1,0 +1,24 @@
+.read-blog-list {
+	@extend .page;
+	flex: 1;
+	position: relative;
+
+	&__content {
+		margin-top: 3rem;
+		display: flex;
+
+		& :nth-child(2) {
+			flex: 0 0 24%;
+			align-self: flex-start;
+		}
+	}
+
+	&__blogs {
+		flex: 1;
+		@extend .blog-list-extend;
+
+		@include respond(xl) {
+			margin-right: 3rem;
+		}
+	}
+}

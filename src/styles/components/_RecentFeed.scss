@@ -1,0 +1,38 @@
+.recent-feed {
+  border-radius: 5px;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+
+  &__header {
+    background-color: $teal;
+    padding: 1.5rem 2rem;
+  }
+  &__title {
+    color: $white;
+    line-height: 1.2;
+    font-weight: 400;
+  }
+  &__content {
+    background-color: $grey-lightest;
+  }
+}
+
+.recent-feed-item {
+  display: block;
+  padding: 1rem 3rem;
+  border-bottom: 1px solid darken($grey-lightest, 5%);
+
+  &:hover {
+    background-color: darken(#f8fafc,2%);
+  }
+
+  &__title {
+    color: lighten($grey-darkest, 10%);
+  }
+
+  &__date {
+    color: darken($grey, 5%);
+    font-size: 1.4rem;
+    white-space: nowrap;
+  }
+}

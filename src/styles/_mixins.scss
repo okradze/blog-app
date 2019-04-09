@@ -1,0 +1,39 @@
+$bp-xs: 320px;
+$bp-xsm: 400px;
+$bp-sm: 576px;
+$bp-md: 768px;
+$bp-lg: 992px;
+$bp-xl: 1200px;
+
+@mixin respond($media) {
+	@if $media == xs {
+		@media only screen and (min-width: $bp-xs) {
+			@content;
+		}
+	}
+	@if $media == xsm {
+		@media only screen and (min-width: $bp-xsm) {
+			@content;
+		}
+	}
+	@if $media == sm {
+		@media only screen and (min-width: $bp-md) {
+			@content;
+		}
+	}
+	@if $media == md {
+		@media only screen and (min-width: $bp-md) {
+			@content;
+		}
+	}
+	@if $media == lg {
+		@media only screen and (min-width: $bp-lg) {
+			@content;
+		}
+	}
+	@if $media == xl {
+		@media only screen and (min-width: $bp-xl) {
+			@content;
+		}
+	}
+}

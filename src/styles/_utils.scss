@@ -1,0 +1,70 @@
+.container {
+	max-width: 120rem;
+	margin: 0 auto;
+}
+
+.center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+.blog-list-extend {
+	display: grid;
+	align-items: start;
+	grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+	grid-template-rows: 1fr min-content;
+	grid-gap: 3rem;
+	grid-auto-flow: row;
+
+	@include respond(xs) {
+		grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+	}
+
+	@include respond(xsm) {
+		grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+	}
+
+	@include respond(sm) {
+		grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
+	}
+	@include respond(md) {
+		grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
+	}
+}
+
+.page {
+	padding: 4rem 1rem;
+
+	@include respond(md) {
+		padding: 6rem 1rem;
+	}
+}
+
+.mb-auto {
+	margin-bottom: auto;
+}
+
+.small-loader {
+	width: 4rem;
+	grid-column: 1 / -1;
+	justify-self: center;
+
+	@include respond(xsm) {
+		width: 4.5rem;
+	}
+	@include respond(md) {
+		width: 5rem;
+	}
+	@include respond(lg) {
+		width: 5.5rem;
+	}
+	@include respond(xl) {
+		width: 6rem;
+	}
+	@media only screen and (min-width: 2000px) {
+		width: 8rem;
+	}
+}

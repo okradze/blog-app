@@ -1,0 +1,152 @@
+.header {
+	position: sticky;
+	display: flex;
+	background-color: $white;
+	top: 0;
+	left: 0;
+	right: 0;
+	box-shadow: $shadow;
+	z-index: 100;
+
+	&__login {
+		padding: 0 1rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	&__logo {
+		display: none;
+		text-align: center;
+
+		@include respond(md) {
+			display: block;
+		}
+
+		&-text {
+			color: $teal-dark;
+		}
+	}
+	&__user {
+		display: none;
+		flex: 1;
+		align-items: center;
+		justify-content: flex-end;
+
+		@include respond(md) {
+			display: flex;
+		}
+	}
+	&__img {
+		display: block;
+		border-radius: 50%;
+		max-width: 100%;
+		height: 3.8rem;
+		margin-right: 2rem;
+	}
+}
+
+.mobile-nav {
+	position: fixed;
+	z-index: 80;
+	display: flex;
+	background-color: $white;
+	flex-direction: column;
+	top: 5.2rem;
+	left: 0;
+	right: 0;
+	visibility: hidden;
+	opacity: 0;
+	border-top: 1px solid $grey-lighter;
+	transform: translate3d(0, -100%, 0);
+	transition: transform .3s, opacity .3s;
+
+	@include respond(md) {
+		display: none;
+	}
+
+	&__link {
+		font-size: 1.7rem;
+		opacity: 0;
+		color: $grey-darkest;
+		transition: opacity .3s;
+		padding: 2rem 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-bottom: 1px solid $grey-lighter;
+
+		&:hover {
+			background-color: $grey-lightest;
+		}
+	}
+}
+
+.nav {
+	display: none;
+	align-items: center;
+	align-self: stretch;
+	flex: 1;
+
+	@include respond(md) {
+		display: flex;
+	}
+
+	&__link {
+		display: flex;
+		align-items: center;
+		height: 100%;
+		color: $grey-darker;
+		border-bottom: 2px solid transparent;
+		margin-right: 2rem;
+	}
+	&__link:hover {
+		color: $teal;
+		border-bottom: 2px solid $teal;
+	}
+}
+
+.desktop-toggle {
+	display: none;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 1rem;
+
+	@include respond(md) {
+		display: flex;
+	}
+}
+
+.mobile-toggle {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding: .5rem 1rem;
+
+	@include respond(md) {
+		display: none;
+	}
+
+	&__checkbox {
+		display: none;
+	}
+
+	&__checkbox:checked ~ .mobile-nav {
+		opacity: 1;
+		visibility: visible;
+		bottom: 0;
+		transform: translateZ(0);
+	}
+	&__checkbox:checked ~ .mobile-nav .mobile-nav__link {
+		opacity: 1;
+	}
+	&__label {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 0.5rem 0;
+	}
+	&__hamburger {
+		cursor: pointer;
+	}
+}

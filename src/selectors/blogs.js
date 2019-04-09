@@ -1,4 +1,4 @@
-export default (blogs, { title, searchBy }) => {
+export default (blogs, { title = '', searchBy = 'title' }) => {
     return blogs.filter(blog => {
 
         if (searchBy === 'title') {

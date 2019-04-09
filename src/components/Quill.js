@@ -7,7 +7,7 @@ export const Quill = ({ body, setBody }) => {
           [{ 'header': [1, 2, false] }],
           ['bold', 'italic', 'underline','strike', 'blockquote'],
           [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-          ['link', 'image'],
+          ['link'],
           ['clean'],
           ['code']
         ]
@@ -16,7 +16,7 @@ export const Quill = ({ body, setBody }) => {
         'header',
         'bold', 'italic', 'underline', 'strike', 'blockquote',
         'list', 'bullet', 'indent',
-        'link', 'image', 'code'
+        'link', 'code'
     ];
 
 	return (
@@ -24,9 +24,6 @@ export const Quill = ({ body, setBody }) => {
 			value={body}
 			onChange={(body) => {
 			    setBody(body);
-            }}
-            style={{
-                backgroundColor: '#fff'
             }}
 			modules={modules}
 			formats={formats}

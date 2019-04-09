@@ -1,0 +1,6 @@
+.blog-list {
+	@extend .blog-list-extend;
+	margin-top: 3rem;
+	flex: 1;
+	position: relative;
+}

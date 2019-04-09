@@ -1,0 +1,23 @@
+.quill {
+	background-color: $white;
+	border: 1px solid $light-grey;
+	border-radius: 5px;
+}
+
+.ql-container {
+	height: auto;
+}
+
+.ql-toolbar.ql-snow {
+	border: none;
+	border-bottom: 1px solid $light-grey;
+}
+.ql-container.ql-snow {
+	border: none;
+}
+
+.ql-editor {
+	line-height: 1.6;
+	font-size: 1.7rem;
+	color: $grey-darkest;
+}

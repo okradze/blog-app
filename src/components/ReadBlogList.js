@@ -1,91 +1,108 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import 'intersection-observer';
+import MediaQuery from 'react-responsive';
 import BlogListItem from './BlogListItem';
-import selectBlogs from '../selectors/blogs';
 import db from '../firebase/firebase';
-import Loader from './Loader';
 import BlogFilters from './BlogFilters';
 import loader from '../images/loader.gif';
+import RecentFeed from './RecentFeed';
+import BlogsContext from '../context/blogs-context';
 
 let startDoc = null;
 
-const getBlogs = (docs) => {
-    const blogs = [];
-    docs.forEach(doc => {
-        blogs.push({
-            id: doc.id,
-            ...doc.data()
-        });
-    });
-    startDoc = docs[docs.length - 1];
-    return blogs;
-}
+const getBlogs = docs => {
+	const blogs = [];
+	docs.forEach(doc => {
+		blogs.push({
+			id: doc.id,
+			...doc.data(),
+		});
+	});
+	startDoc = docs[docs.length - 1];
+	return blogs;
+};
 
 const firstFetchBlogs = async () => {
-    const data = await db.collection('blogs').orderBy('createdAt', 'desc').limit(5).get();
-    return getBlogs(data.docs);
+	const data = await db.collection('blogs').orderBy('createdAt', 'desc').limit(6).get();
+	return getBlogs(data.docs);
 };
 
 const fetchBlogs = async () => {
-    const data = await db.collection('blogs').orderBy('createdAt', 'desc').startAfter(startDoc).limit(5).get();
-    return getBlogs(data.docs);
-}
+	const data = await db.collection('blogs').orderBy('createdAt', 'desc').startAfter(startDoc).limit(6).get();
+	return getBlogs(data.docs);
+};
 
-export const ReadBlogList = ({ filters }) => {
-    const [blogs, setBlogs] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [smallLoading, setSmallLoading] = useState(false);
-    const [noMore, setNoMore] = useState(false);
+export const ReadBlogList = () => {
+	const [ blogs, setBlogs ] = useState([]);
+	const [ loading, setLoading ] = useState(true);
+	const [ fetching, setFetching ] = useState(false);
 
-    useEffect(() => {
-        firstFetchBlogs().then(blogs => {
-            setBlogs(blogs);
-            setLoading(false);
-        });
-        return () => {}
-    }, []);
+	const scrollElement = React.useRef();
 
-    const paginateBlogs = () => {
-        setSmallLoading(true);
-        fetchBlogs().then(newBlogs => {
-            setBlogs([...blogs, ...newBlogs]);
-            setSmallLoading(false);
-        }).catch(() => {
-            setSmallLoading(false);
-            setNoMore(true);
-        })
-    };
+	const paginateBlogs = () => {
+		setFetching(true);
+		fetchBlogs()
+			.then(newBlogs => {
+				const data = JSON.parse(sessionStorage.getItem('readBlogs'));
+				setBlogs([ ...data, ...newBlogs ]);
+				sessionStorage.setItem('readBlogs', JSON.stringify([ ...data, ...newBlogs ]));
+				setFetching(false);
+			})
+			.catch(() => {
+				setFetching(false);
+			});
+	};
 
-    const filteredBlogs = selectBlogs(blogs, filters);
+	useEffect(() => {
+		let didCancel = false;
+		firstFetchBlogs().then(newBlogs => {
+			if (!didCancel) {
+				setBlogs(newBlogs);
+				sessionStorage.setItem('readBlogs', JSON.stringify(newBlogs));
+				setLoading(false);
 
-    return (
-        <div onScroll={(e) => {
-            if (e.target.scrollHeight -  e.target.scrollTop <= (e.target.clientHeight)){
-                paginateBlogs();
-            }
-        }} className="container mx-auto mt-24 py-6 overflow-y-auto">
-            {loading && <Loader />}
-                <BlogFilters/>
-            {!loading && (
-                <>
-                    {filteredBlogs.length > 0 ? (
-                            <div className="mt-8">
-                                {filteredBlogs.map(blog => <BlogListItem to={'read'} key={blog.id} {...blog} />)}
-                            </div>
-                    ) : (
-                        <div className="flex items-center justify-center mt-32">
-                            <p className="text-xl text-grey-darkest">No Blogs</p>
-                        </div>
-                    )}
-                    {(smallLoading && <div className="flex items-center justify-center"><img className="w-12 h-12" src={loader} /></div>) || (noMore && <p className="text-grey-darkest text-center text-xl">No more blogs :(</p>)}
-                </>
-            )}
-        </div>
-    )
-}
+				const io = new IntersectionObserver(entries => {
+					const ratio = entries[0].intersectionRatio;
+					if (ratio > 0) {
+						setFetching(true);
+						paginateBlogs();
+					}
+				});
+				io.observe(scrollElement.current);
+			}
+		});
+		return () => {
+			didCancel = true;
+		};
+	}, []);
 
-const mapStateToProps = (state) => ({
-    filters: state.filters
+	return (
+		<div className="container read-blog-list">
+			<BlogFilters />
+
+			{loading && <img className="center small-loader" src={loader} alt="Loader" />}
+
+			{!loading && (
+				<BlogsContext.Provider value={{ blogs }}>
+					<div className="read-blog-list__content">
+						<div className="read-blog-list__blogs">
+							{blogs.map(blog => <BlogListItem to="read" key={blog.id} {...blog} />)}
+							{fetching && <img src={loader} className="small-loader" alt="Loader" />}
+							<div style={{ minHeight: '1px', minWidth: '1px' }} ref={scrollElement} />
+						</div>
+						<MediaQuery minDeviceWidth={1200}>
+							<RecentFeed />
+						</MediaQuery>
+					</div>
+				</BlogsContext.Provider>
+			)}
+		</div>
+	);
+};
+
+const mapStateToProps = state => ({
+	filters: state.filters,
 });
 
 export default connect(mapStateToProps)(ReadBlogList);

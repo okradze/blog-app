@@ -8,25 +8,23 @@ import ReadBlogPage from '../components/ReadBlogPage';
 import NotFoundPage from '../components/NotFoundPage';
 import ReadBlogList from '../components/ReadBlogList';
 import LoginPage from '../components/LoginPage';
-import PublicRoute from '../routes/PublicRoute';
-import PrivateRoute from '../routes/PrivateRoute';
+import PublicRoute from './PublicRoute';
+import PrivateRoute from './PrivateRoute';
 
 export const history = createBrowserHistory();
 
 const AppRouter = () => (
-    <Router history={history}>
-        <div>
-            <Switch>
-                <PublicRoute path='/' component={LoginPage} exact={true} />
-                <PrivateRoute path='/dashboard' component={DashboardPage} />
-                <PrivateRoute path='/create' component={CreateBlogPage} />
-                <PrivateRoute path='/edit/:id' component={EditBlogPage} />
-                <PrivateRoute path='/read' component={ReadBlogList} exact={true} />
-                <Route path='/read/:id' component={ReadBlogPage} />
-                <Route component={NotFoundPage} />
-            </Switch>
-        </div>
-    </Router>
+	<Router history={history}>
+		<Switch>
+			<PublicRoute path="/" component={LoginPage} exact={true} />
+			<PrivateRoute path="/dashboard" component={DashboardPage} />
+			<PrivateRoute path="/create" component={CreateBlogPage} />
+			<PrivateRoute path="/edit/:id" component={EditBlogPage} />
+			<PrivateRoute path="/read" component={ReadBlogList} exact={true} />
+			<Route path="/read/:id" component={ReadBlogPage} />
+			<Route component={NotFoundPage} />
+		</Switch>
+	</Router>
 );
 
 export default AppRouter;

@@ -1,0 +1,39 @@
+{
+	"extends": "airbnb",
+	"parserOptions": {
+		"ecmaVersion": 2018,
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"jsx": true
+		}
+	},
+	"env": {
+		"node": true,
+		"browser": true,
+		"es6": true,
+		"jest": true
+	},
+	"plugins": [ "jest" ],
+	"rules": {
+		"no-tabs": "off",
+		"indent": "off",
+		"react/jsx-filename-extension": [ 1, { "extensions": [ ".js" ] } ],
+		"react/jsx-indent": 0,
+		"array-bracket-spacing": "off",
+		"max-len": "off",
+		"newline-per-chained-call": "off",
+		"object-curly-newline": "off",
+		"arrow-parens": "off",
+		"operator-linebreak": "off",
+		"react/prop-types": 0,
+		"import/no-named-as-default": 1,
+		"react/jsx-one-expression-per-line": 0,
+		"implicit-arrow-linebreak": "off",
+		"react/jsx-indent-props": 0,
+		"no-confusing-arrow": "off",
+		"jsx-a11y/label-has-associated-control": 0,
+		"jsx-a11y/label-has-for": 0,
+		"one-var": "off",
+		"one-var-declaration-per-line": "off"
+	}
+}

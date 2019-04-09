@@ -1,0 +1,17 @@
+.filters {
+	display: flex;
+	flex-direction: column;
+
+    @include respond(xsm){
+    	flex-direction: row;
+    	align-items: center;
+    }
+
+    &__input {
+    	margin: 0 0 2rem 0;
+
+        @include respond(xsm){
+    		margin: 0 2rem 0 0;
+    	}
+    }
+}

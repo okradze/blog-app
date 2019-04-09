@@ -8,9 +8,7 @@ export const PublicRoute = ({ isAuth, component: Component, ...rest }) => (
             <Redirect to="/dashboard" />
             
         ) : (
-            <div className="bg-grey-lighter">
-                <Component {...props} />
-            </div>
+            <Component {...props} />
         )
     )} />
 );

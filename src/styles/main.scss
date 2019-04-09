@@ -1,35 +1,20 @@
 @tailwind preflight;
-
-a {
-    text-decoration: none;
-}
-
-input, textarea {
-    border: 1px solid #ebe9e9;
-}
-
-.container {
-    @apply px-4;
-}
-
-.top-nav-item {
-    @apply .flex .items-center .h-full .text-grey-darker .mr-8 .border-b-2 .border-solid .border-transparent;
-}
-.top-nav-item:hover {
-    @apply .text-teal .border-teal;
-}
-.box-content {
-    -webkit-box-sizing: content-box;
-    box-sizing: content-box;
-}
-
-.button {
-    @apply .bg-teal .font-medium .py-3 .px-6 .text-white .rounded-full;
-}
-.button:hover {
-    @apply .bg-teal-dark;
-}
-
 @tailwind components;
 @tailwind utilities;
-@import './base.scss'
+@import './variables';
+@import './mixins';
+@import './base';
+@import './utils';
+@import './components/Header';
+@import './components/button';
+@import './components/CreateBlogForm';
+@import './components/alert';
+@import './components/Quill';
+@import './components/BlogFilters';
+@import './components/BlogList';
+@import './components/Dashboard';
+@import './components/ReadBlogList';
+@import './components/BlogListItem';
+@import './components/ReadBlogPage';
+@import './components/RecentFeed';
+@import './components/Footer';

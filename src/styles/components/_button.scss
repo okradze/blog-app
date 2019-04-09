@@ -1,0 +1,36 @@
+.button {
+	background-color: $teal;
+	color: $white;
+	border-radius: 1000px;
+	padding: 1rem 2rem;
+
+	&:hover {
+		background-color: $teal-dark;
+	}
+}
+
+.button--grey {
+	align-self: flex-start;
+	background-color: #b8c2cc;
+}
+
+.button--grey:hover {
+	background-color: #8795a1;
+}
+
+.read-more {
+	color: $grey-darker;
+	display: block;
+	margin-bottom: 1rem;
+	padding: .8rem 1rem;
+	background-color: darken($grey-lighter, 5%);
+
+	@include respond(xs) {
+		margin-right: 1.5rem;
+		display: inline-block;
+	}
+
+	&:hover {
+		color: $grey-darkest;
+	}
+}

@@ -1,59 +1,72 @@
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
+import Parse from 'html-react-parser';
 import db from '../firebase/firebase';
 import NotFoundPage from './NotFoundPage';
-import moment from 'moment';
-import Loader from './Loader';
+import loader from '../images/loader.gif';
 import Header from './Header';
-import Parse from 'html-react-parser';
-const DOMPurify = require('dompurify')(window);
 
-const fetchBlog = async (id) => {
-    const data = await db.collection('blogs').doc(id).get();
-    return {
-        id: data.id,
-        ...data.data()
-    };
-}
+const fetchBlog = async id => {
+	const data = await db.collection('blogs').doc(id).get();
+	return {
+		id: data.id,
+		...data.data(),
+	};
+};
 
-export const ReadBlogPage = (props) => {
-    const [blog, setBlog] = useState(null);
-    const [loading, setLoading] = useState(true);
+export const ReadBlogPage = props => {
+	const [ blog, setBlog ] = useState(null);
+	const [ loading, setLoading ] = useState(true);
+	const [ visibleCaption, setVisibleCaption ] = useState(true);
 
-    useEffect(() => {
-        fetchBlog(props.match.params.id).then(blog => {
-            setBlog(blog);
-            setLoading(false);
-        });
-    }, []);
+	useEffect(() => {
+		fetchBlog(props.match.params.id).then(newBlog => {
+			setBlog(newBlog);
+			setLoading(false);
+		});
+	}, []);
 
-    return (
-        <div>
-            <Header />
-            {loading ? (
-                <Loader />
-            ) : (
-                    <>
-                        {blog ? (
-                            <div className="container mx-auto mt-24 py-8 px-8 rounded bg-grey-lightest">
-                                <h1 className="text-grey-darkest text-center tracking-wide">{blog.title}</h1>
-                                <div className="flex justify-between">
-                                    <div className="flex items-center">
-                                        <img className="rounded-full w-auto h-10 cursor-pointer mr-4" src={blog.photoURL} alt="author" />
-                                        <p className="text-grey-darker">{blog.author}</p>
-                                    </div>
-                                    <p className="text-grey-darker">{moment(blog.createdAt).format('MMM Do, YYYY')}</p>
-                                </div>
-                                <div className="mt-12 px-10">
-                                    <div className="text-grey-darkest text-lg leading-normal">{Parse(DOMPurify.sanitize(blog.body))}</div>
-                                </div>
-                            </div>
-                        ) : (
-                                <NotFoundPage />
-                            )}
-                    </>
-                )}
-        </div>
-    )
-}
+	return (
+		<React.Fragment>
+			<Header />
+			{loading ? (
+				<img className="center small-loader" src={loader} alt="Loader" />
+			) : (
+				<React.Fragment>
+					{blog ? (
+						<div className="page">
+							<article className="article">
+								<h1 className="article__title">{blog.title}</h1>
+								<div className="blog-info">
+									<img src={blog.photoURL} className="blog-info__photo" alt={blog.author} />
+									<div className="blog-info__content">
+										<p className="blog-info__author">{blog.author}</p>
+										<time dateTime={new Date(blog.createdAt)} className="blog-info__date">
+											{moment(blog.createdAt).format('MMM Do, YYYY')}
+										</time>
+									</div>
+								</div>
+								<div className="article__thumbnail">
+									<img
+										onLoad={() => {
+											setVisibleCaption(false);
+										}}
+										src={blog.url}
+										className="article__thumbnail-image"
+										alt={blog.title}
+									/>
+									{visibleCaption && <img className="small-loader" src={loader} alt="Loader" />}
+								</div>
+								<div className="article__content">{Parse(blog.body)}</div>
+							</article>
+						</div>
+					) : (
+						<NotFoundPage />
+					)}
+				</React.Fragment>
+			)}
+		</React.Fragment>
+	);
+};
 
 export default ReadBlogPage;

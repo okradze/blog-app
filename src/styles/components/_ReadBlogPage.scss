@@ -1,0 +1,50 @@
+.article {
+	max-width: 80rem;
+	margin: 0 auto;
+	background-color: $grey-lightest;
+	padding: 2rem 2rem;
+
+	@include respond(sm) {
+		padding: 2rem 3rem;
+	}
+
+	@include respond(md) {
+		padding: 2rem 4rem;
+	}
+
+	&__title {
+		color: $teal-dark;
+		letter-spacing: 1px;
+		font-size: 3rem;
+		font-weight: 400;
+		margin-bottom: 2rem;
+	}
+	&__thumbnail {
+		min-height: 10rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-top: 3rem;
+
+		@include respond(sm) {
+			min-height: 15rem;
+		}
+
+		@include respond(lg) {
+			min-height: 20rem;
+		}
+
+		&-image {
+			display: block;
+			border-top-left-radius: 5px;
+			border-top-right-radius: 5px;
+		}
+	}
+	&__content {
+		margin-top: 3rem;
+		padding: 0 1rem;
+		font-size: 1.8rem;
+		line-height: 2;
+		color: $grey-darkest;
+	}
+}

@@ -1,0 +1,56 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: inherit;
+}
+
+html {
+	font-size: 62.5%;
+	box-sizing: border-box;
+}
+
+body {
+	font-size: 1.6rem;
+	line-height: 1.6;
+}
+
+input::placeholder,
+textarea::placeholder {
+	color: $grey-darker;
+	text-transform: uppercase;
+}
+
+a {
+	text-decoration: none;
+}
+
+input,
+textarea {
+	border: 1px solid $light-grey;
+}
+
+.input {
+	padding: 1rem 2rem;
+	border-radius: 5px;
+	font-size: 1.4rem;
+	box-shadow: 0 .2rem .5rem rgba(0, 0, 0, .05);
+}
+
+#app {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	background-color: $grey-lighter;
+}
+
+@keyframes pulse {
+	0% {
+		background-color: rgba(196, 196, 196, .1);
+	}
+	50% {
+		background-color: rgba(196, 196, 196, .3);
+	}
+	100% {
+		background-color: rgba(196, 196, 196, .1);
+	}
+}
