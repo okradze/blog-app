@@ -54,6 +54,7 @@
 
 .mobile-nav {
 	position: fixed;
+	padding: 0 1rem;
 	z-index: 80;
 	display: flex;
 	background-color: $white;
@@ -85,6 +86,10 @@
 		&:hover {
 			background-color: $grey-lightest;
 		}
+	}
+
+	& button {
+		margin-top: 2rem;
 	}
 }
 

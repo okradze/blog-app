@@ -24,10 +24,13 @@ export const Header = ({ photoURL, uid, startLogin, startLogout }) => (
 							<Link className="mobile-nav__link" to="/read">
 								Blogs
 							</Link>
+							<button type="button" onClick={startLogout} className="button">
+								Log Out
+							</button>
 						</React.Fragment>
 					) : (
-						<button type="button" onClick={startLogin} className="mobile-nav__link">
-							Login
+						<button type="button" onClick={startLogin} className="button">
+							Log In
 						</button>
 					)}
 				</nav>
