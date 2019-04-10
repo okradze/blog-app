@@ -13,7 +13,9 @@ exports[`should render component correctly 1`] = `
     value="title"
   />
   <input
-    className="input"
+    accept="image/*"
+    className="input file-upload"
+    multiple={true}
     onChange={[Function]}
     type="file"
   />
@@ -27,7 +29,7 @@ exports[`should render component correctly 1`] = `
     onClick={[Function]}
     type="button"
   >
-     Save Blog
+    Save Blog
   </button>
 </form>
 `;
@@ -54,7 +56,7 @@ exports[`should render component correctly when edit page 1`] = `
     onClick={[Function]}
     type="button"
   >
-     Save Blog
+    Save Blog
   </button>
   <button
     className="button button--grey"
@@ -62,7 +64,7 @@ exports[`should render component correctly when edit page 1`] = `
     onClick={[MockFunction]}
     type="button"
   >
-     Remove
+    Remove
   </button>
 </form>
 `;

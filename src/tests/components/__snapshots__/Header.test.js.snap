@@ -49,6 +49,13 @@ exports[`should render Header correctly when logged in 1`] = `
         >
           Blogs
         </Link>
+        <button
+          className="button"
+          onClick={[MockFunction]}
+          type="button"
+        >
+          Log Out
+        </button>
       </nav>
     </div>
     <div
@@ -142,11 +149,11 @@ exports[`should render Header correctly when logged out 1`] = `
         className="mobile-nav"
       >
         <button
-          className="mobile-nav__link"
+          className="button"
           onClick={[MockFunction]}
           type="button"
         >
-          Login
+          Log In
         </button>
       </nav>
     </div>
