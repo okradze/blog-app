@@ -6,6 +6,7 @@ import { firebase } from './firebase/firebase';
 import configureStore from './store/configureStore';
 import { logout, login } from './actions/auth';
 import loader from './images/loader.gif';
+import 'normalize.css';
 import 'react-quill/dist/quill.snow.css';
 import './styles/main.scss';
 

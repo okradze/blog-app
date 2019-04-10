@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render component correctly 1`] = `
+<footer
+  className="footer"
+>
+  <div
+    className="container footer__content"
+  >
+    <nav
+      className="footer__nav"
+    >
+      <Link
+        className="footer__link"
+        replace={false}
+        to="/dashboard"
+      >
+        Dashboard
+      </Link>
+      <Link
+        className="footer__link"
+        replace={false}
+        to="/create"
+      >
+        Create
+      </Link>
+      <Link
+        className="footer__link"
+        replace={false}
+        to="/read"
+      >
+        Blogs
+      </Link>
+    </nav>
+    <p
+      className="footer__copy"
+    >
+      Copyright © 2019 Mirian Okradze
+    </p>
+  </div>
+</footer>
+`;

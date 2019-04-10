@@ -1,41 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import 'intersection-observer';
-import db from '../firebase/firebase';
+import { fetchBlogs, firstFetchBlogs } from '../services/fetch';
 import BlogListItem from './BlogListItem';
 import loader from '../images/loader.gif';
 import selectBlogs from '../selectors/blogs';
-
-let startDoc = null;
-
-const getBlogs = docs => {
-	const blogs = [];
-	docs.forEach(doc => {
-		blogs.push({
-			id: doc.id,
-			...doc.data(),
-		});
-	});
-	startDoc = docs[docs.length - 1];
-	return blogs;
-};
-
-const firstFetchBlogs = async uid => {
-	const data = await db.collection('users').doc(uid).collection('blogs').orderBy('createdAt', 'desc').limit(6).get();
-	return getBlogs(data.docs);
-};
-
-const fetchBlogs = async uid => {
-	const data = await db
-		.collection('users')
-		.doc(uid)
-		.collection('blogs')
-		.orderBy('createdAt', 'desc')
-		.startAfter(startDoc)
-		.limit(6)
-		.get();
-	return getBlogs(data.docs);
-};
 
 export const BlogList = ({ uid, filters }) => {
 	const [ blogs, setBlogs ] = useState([]);

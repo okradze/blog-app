@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render component correctly 1`] = `
+<form
+  className="create-form"
+  onSubmit={[Function]}
+>
+  <input
+    className="input create-form__input"
+    onChange={[Function]}
+    placeholder="Blog title"
+    type="text"
+    value="title"
+  />
+  <input
+    className="input"
+    onChange={[Function]}
+    type="file"
+  />
+  <Quill
+    body="body"
+    setBody={[Function]}
+  />
+  <button
+    className="button create-form__button"
+    disabled={false}
+    onClick={[Function]}
+    type="button"
+  >
+     Save Blog
+  </button>
+</form>
+`;
+
+exports[`should render component correctly when edit page 1`] = `
+<form
+  className="create-form"
+  onSubmit={[Function]}
+>
+  <input
+    className="input create-form__input"
+    onChange={[Function]}
+    placeholder="Blog title"
+    type="text"
+    value="title"
+  />
+  <Quill
+    body="body"
+    setBody={[Function]}
+  />
+  <button
+    className="button create-form__button"
+    disabled={false}
+    onClick={[Function]}
+    type="button"
+  >
+     Save Blog
+  </button>
+  <button
+    className="button button--grey"
+    disabled={false}
+    onClick={[MockFunction]}
+    type="button"
+  >
+     Remove
+  </button>
+</form>
+`;

@@ -8,6 +8,12 @@
 	box-shadow: $shadow;
 	z-index: 100;
 
+	&__content {
+		display: flex;
+		width: 100%;
+		justify-content: space-between;
+	}
+
 	&__login {
 		padding: 0 1rem;
 		display: flex;
@@ -20,7 +26,7 @@
 		text-align: center;
 
 		@include respond(md) {
-			display: block;
+			display: inline-block;
 		}
 
 		&-text {
@@ -40,7 +46,7 @@
 	&__img {
 		display: block;
 		border-radius: 50%;
-		max-width: 100%;
+		width: 3.8rem;
 		height: 3.8rem;
 		margin-right: 2rem;
 	}
@@ -109,8 +115,8 @@
 .desktop-toggle {
 	display: none;
 	align-items: center;
-	justify-content: space-between;
 	padding: 0 1rem;
+	width: 100%;
 
 	@include respond(md) {
 		display: flex;
@@ -122,6 +128,7 @@
 	align-items: center;
 	justify-content: flex-end;
 	padding: .5rem 1rem;
+	margin-left: auto;
 
 	@include respond(md) {
 		display: none;

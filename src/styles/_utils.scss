@@ -1,6 +1,19 @@
 .container {
-	max-width: 120rem;
+	width: 100%;
 	margin: 0 auto;
+
+	@include respond(sm) {
+		max-width: $bp-sm;
+	}
+	@include respond(md) {
+		max-width: $bp-md;
+	}
+	@include respond(lg) {
+		max-width: $bp-lg;
+	}
+	@include respond(xl) {
+		max-width: $bp-xl;
+	}
 }
 
 .center {
@@ -67,4 +80,8 @@
 	@media only screen and (min-width: 2000px) {
 		width: 8rem;
 	}
+}
+
+.form-loader {
+	align-self: center;
 }

@@ -1,0 +1,16 @@
+.not-found {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&__content {
+		text-align: center;
+		background-color: $grey-lightest;
+		border-radius: 5px;
+		padding: 3rem;
+	}
+
+	&__title {
+		color: $grey-darkest;
+	}
+}

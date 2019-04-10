@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render component when loading 1`] = `
+<Fragment>
+  <img
+    alt="Loader"
+    className="center small-loader"
+    src={Object {}}
+  />
+</Fragment>
+`;
+
+exports[`should render component when loading 2`] = `
+<Fragment>
+  <img
+    alt="Loader"
+    className="center small-loader"
+    src={Object {}}
+  />
+</Fragment>
+`;

@@ -8,6 +8,7 @@ import BlogFilters from './BlogFilters';
 import loader from '../images/loader.gif';
 import RecentFeed from './RecentFeed';
 import BlogsContext from '../context/blogs-context';
+import selectBlogs from '../selectors/blogs';
 
 let startDoc = null;
 
@@ -33,7 +34,7 @@ const fetchBlogs = async () => {
 	return getBlogs(data.docs);
 };
 
-export const ReadBlogList = () => {
+export const ReadBlogList = ({ filters }) => {
 	const [ blogs, setBlogs ] = useState([]);
 	const [ loading, setLoading ] = useState(true);
 	const [ fetching, setFetching ] = useState(false);
@@ -77,6 +78,8 @@ export const ReadBlogList = () => {
 		};
 	}, []);
 
+	const filteredBlogs = selectBlogs(blogs, filters);
+
 	return (
 		<div className="container read-blog-list">
 			<BlogFilters />
@@ -87,7 +90,7 @@ export const ReadBlogList = () => {
 				<BlogsContext.Provider value={{ blogs }}>
 					<div className="read-blog-list__content">
 						<div className="read-blog-list__blogs">
-							{blogs.map(blog => <BlogListItem to="read" key={blog.id} {...blog} />)}
+							{filteredBlogs.map(blog => <BlogListItem to="read" key={blog.id} {...blog} />)}
 							{fetching && <img src={loader} className="small-loader" alt="Loader" />}
 							<div style={{ minHeight: '1px', minWidth: '1px' }} ref={scrollElement} />
 						</div>

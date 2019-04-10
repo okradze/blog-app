@@ -59,7 +59,7 @@ export const EditBlogPage = ({ uid, match, history }) => {
 	) : (
 		<React.Fragment>
 			{blog ? (
-				<div className="container">
+				<div className="container mb-auto">
 					<CreateBlogForm
 						submitLoading={submitLoading}
 						submitDisabled={submitDisabled}

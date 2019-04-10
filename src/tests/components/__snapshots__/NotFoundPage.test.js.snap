@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render component correctly 1`] = `
+<div
+  className="not-found center"
+>
+  <div
+    className="not-found__content"
+  >
+    <h2
+      className="not-found__title"
+    >
+      Page Not Found
+    </h2>
+  </div>
+</div>
+`;

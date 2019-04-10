@@ -31,21 +31,30 @@ export const CreateBlogForm = ({
 	};
 	const onSave = e => {
 		e.preventDefault();
-		if (!blogTitle || !blogBody) {
-			setError('Please provide blog title and body');
-		} else {
-			setError('');
-			onSubmit(
-				{
-					title: xss(blogTitle),
-					body: xss(blogBody),
-					createdAt: blogCreatedAt,
-					author: xss(auth.displayName),
-					photoURL: xss(auth.photoURL),
-					file,
-				},
-				auth.uid,
-			);
+
+		const data = {
+			title: xss(blogTitle),
+			body: xss(blogBody),
+			createdAt: blogCreatedAt,
+			author: xss(auth.displayName),
+			photoURL: xss(auth.photoURL),
+			file,
+		};
+
+		if (isEdit) {
+			if (!blogTitle || blogBody.length < 200) {
+				setError('Please provide blog title and make sure body contains more than 200 characters');
+			} else {
+				setError('');
+				onSubmit(data, auth.uid);
+			}
+		} else if (!isEdit) {
+			if (!blogTitle || blogBody.length < 200 || !file) {
+				setError('Please provide blog title, thumbnail and make sure body contains more than 200 characters');
+			} else {
+				setError('');
+				onSubmit(data, auth.uid);
+			}
 		}
 	};
 
@@ -70,16 +79,22 @@ export const CreateBlogForm = ({
 				onChange={onTitleChange}
 			/>
 
-			<input type="file" className="input" onChange={onFileChange} />
+			{!isEdit && (
+				<input type="file" className="input file-upload" onChange={onFileChange} multiple accept="image/*" />
+			)}
 
 			<Quill body={blogBody} setBody={onBodyChange} />
 			<button onClick={onSave} type="button" className="button create-form__button" disabled={submitDisabled}>
-				{submitLoading && <img className="w-4 h-4 mr-2" src={loader} alt="loader" />} Save Blog
+				Save Blog
 			</button>
+			{submitLoading && <img className="small-loader form-loader" src={loader} alt="loader" />}
 			{isEdit && (
-				<button type="button" className="button button--grey" onClick={onRemove} disabled={removeDisabled}>
-					{removeLoading && <img className="center small-loader" src={loader} alt="loader" />} Remove
-				</button>
+				<React.Fragment>
+					<button type="button" className="button button--grey" onClick={onRemove} disabled={removeDisabled}>
+						Remove
+					</button>
+					{removeLoading && <img className="small-loader form-loader" src={loader} alt="loader" />}
+				</React.Fragment>
 			)}
 		</form>
 	);

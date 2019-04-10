@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render component correctly 1`] = `
+<Link
+  className="recent-feed-item"
+  replace={false}
+  to="read/abc123"
+>
+  <h4
+    className="recent-feed-item__title"
+  >
+    Title
+  </h4>
+  <time
+    className="recent-feed-item__date"
+    dateTime={1970-01-01T00:02:00.000Z}
+  >
+    Jan 1st, 1970
+  </time>
+</Link>
+`;

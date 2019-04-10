@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render component correctly 1`] = `
+<article
+  className="blog-item"
+>
+  <div
+    className="blog-info"
+  >
+    <img
+      alt="Mirian"
+      className="blog-info__photo"
+      src="abc"
+    />
+    <div
+      className="blog-info__content"
+    >
+      <p
+        className="blog-info__author"
+      >
+        Mirian
+      </p>
+      <time
+        className="blog-info__date"
+        dateTime={1970-01-01T00:01:40.000Z}
+      >
+        Jan 1st, 1970
+      </time>
+    </div>
+  </div>
+  <figure
+    className="blog-item__thumbnail"
+  >
+    <div
+      className="blog-item__thumbnail-no"
+    />
+    <img
+      alt="title"
+      className="blog-item__thumbnail-img"
+      onLoad={[Function]}
+      src="123"
+    />
+  </figure>
+  <div
+    className="blog-item__content"
+  >
+    <h2
+      className="blog-item__title"
+    >
+      title
+    </h2>
+    <Link
+      className="read-more"
+      replace={false}
+      to="read/abc123"
+    >
+      Read more...
+    </Link>
+  </div>
+</article>
+`;
+
+exports[`should render component correctly when on dashboard page 1`] = `
+<article
+  className="blog-item"
+>
+  <div
+    className="blog-info"
+  >
+    <img
+      alt="Mirian"
+      className="blog-info__photo"
+      src="abc"
+    />
+    <div
+      className="blog-info__content"
+    >
+      <p
+        className="blog-info__author"
+      >
+        Mirian
+      </p>
+      <time
+        className="blog-info__date"
+        dateTime={1970-01-01T00:01:40.000Z}
+      >
+        Jan 1st, 1970
+      </time>
+    </div>
+  </div>
+  <figure
+    className="blog-item__thumbnail"
+  >
+    <div
+      className="blog-item__thumbnail-no"
+    />
+    <img
+      alt="title"
+      className="blog-item__thumbnail-img"
+      onLoad={[Function]}
+      src="123"
+    />
+  </figure>
+  <div
+    className="blog-item__content"
+  >
+    <h2
+      className="blog-item__title"
+    >
+      title
+    </h2>
+    <Link
+      className="read-more"
+      replace={false}
+      to="edit/abc123"
+    >
+      Edit Blog
+    </Link>
+    <Link
+      className="read-more"
+      replace={false}
+      to="read/abc123"
+    >
+      Read more...
+    </Link>
+  </div>
+</article>
+`;

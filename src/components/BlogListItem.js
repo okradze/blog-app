@@ -24,7 +24,7 @@ export const BlogListItem = ({ title, author, id, to, createdAt, url, photoURL }
 			</figure>
 
 			<div className="blog-item__content">
-				<h2 className="blog-item__title mb-6 break-words text-grey-darkest">{title}</h2>
+				<h2 className="blog-item__title">{title}</h2>
 				{to === 'edit' && (
 					<Link className="read-more" to={`${to}/${id}`}>
 						Edit Blog

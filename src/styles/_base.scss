@@ -1,7 +1,13 @@
-* {
+*,
+*::before,
+*::after {
 	margin: 0;
 	padding: 0;
 	box-sizing: inherit;
+}
+
+h1 {
+	margin: 0;
 }
 
 html {
@@ -25,7 +31,8 @@ a {
 }
 
 input,
-textarea {
+textarea,
+select {
 	border: 1px solid $light-grey;
 }
 
@@ -41,6 +48,10 @@ textarea {
 	display: flex;
 	flex-direction: column;
 	background-color: $grey-lighter;
+}
+
+img {
+	width: 100%;
 }
 
 @keyframes pulse {
