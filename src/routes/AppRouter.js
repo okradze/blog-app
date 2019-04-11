@@ -27,7 +27,7 @@ const AppRouter = () => (
 					<PrivateRoute path="/create" component={CreateBlogPage} />
 					<PrivateRoute path="/edit/:id" component={EditBlogPage} />
 					<PrivateRoute path="/read" component={ReadBlogList} exact={true} />
-					<ReadBlogPage path="/read/:id" />
+					<Route path="/read/:id" render={props => <ReadBlogPage {...props} />} />
 					<NotFoundPage />
 				</Switch>
 			</React.Fragment>

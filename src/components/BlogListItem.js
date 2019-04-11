@@ -20,7 +20,12 @@ export const BlogListItem = ({ title, author, id, to, createdAt, url, photoURL }
 
 			<figure className="blog-item__thumbnail">
 				{visibleCaption && <div className="blog-item__thumbnail-no" />}
-				<img onLoad={() => setVisibleCaption()} src={url} alt={title} className="blog-item__thumbnail-img" />
+				<img
+					onLoad={() => setVisibleCaption(false)}
+					src={url}
+					alt={title}
+					className="blog-item__thumbnail-img"
+				/>
 			</figure>
 
 			<div className="blog-item__content">

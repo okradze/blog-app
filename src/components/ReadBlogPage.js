@@ -46,17 +46,15 @@ export const ReadBlogPage = props => {
 										</time>
 									</div>
 								</div>
-								<div className="article__thumbnail">
+								<figure className="article__thumbnail">
+									{visibleCaption && <figcaption className="blog-item__thumbnail-no" />}
 									<img
-										onLoad={() => {
-											setVisibleCaption(false);
-										}}
+										onLoad={() => setVisibleCaption(false)}
 										src={blog.url}
 										className="article__thumbnail-image"
 										alt={blog.title}
 									/>
-									{visibleCaption && <img className="small-loader" src={loader} alt="Loader" />}
-								</div>
+								</figure>
 								<div className="article__content">{Parse(blog.body)}</div>
 							</article>
 						</div>
