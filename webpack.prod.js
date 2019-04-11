@@ -51,8 +51,7 @@ module.exports = merge(common, {
 			new MomentLocalesPlugin(),
 			new OptimizeCssAssetsPlugin(),
 			new UglifyJsPlugin({
-				mangle: true,
-				compress: {
+				uglifyOptions: {
 					warnings: false,
 					pure_getters: true,
 					unsafe: true,
@@ -66,11 +65,9 @@ module.exports = merge(common, {
 					evaluate: true,
 					if_return: true,
 					join_vars: true,
-				},
-				output: {
+					mangle: true,
 					comments: false,
 				},
-				exclude: [ /\.min\.js$/gi ],
 			}),
 			new HtmlWebpackPlugin({
 				template: './src/template.html',
