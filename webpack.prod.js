@@ -1,11 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const path = require('path');
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
 const merge = require('webpack-merge');
 const common = require('./webpack.common');
 
@@ -47,8 +48,30 @@ module.exports = merge(common, {
 			},
 		},
 		minimizer: [
+			new MomentLocalesPlugin(),
 			new OptimizeCssAssetsPlugin(),
-			new TerserPlugin(),
+			new UglifyJsPlugin({
+				mangle: true,
+				compress: {
+					warnings: false,
+					pure_getters: true,
+					unsafe: true,
+					unsafe_comps: true,
+					screw_ie8: true,
+					conditionals: true,
+					unused: true,
+					comparisons: true,
+					sequences: true,
+					dead_code: true,
+					evaluate: true,
+					if_return: true,
+					join_vars: true,
+				},
+				output: {
+					comments: false,
+				},
+				exclude: [ /\.min\.js$/gi ],
+			}),
 			new HtmlWebpackPlugin({
 				template: './src/template.html',
 				minify: {
