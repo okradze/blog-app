@@ -1,30 +1,38 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
-import DashboardPage from '../components/DashboardPage';
-import CreateBlogPage from '../components/CreateBlogPage';
-import EditBlogPage from '../components/EditBlogPage';
-import ReadBlogPage from '../components/ReadBlogPage';
-import NotFoundPage from '../components/NotFoundPage';
-import ReadBlogList from '../components/ReadBlogList';
-import LoginPage from '../components/LoginPage';
+import loader from '../images/loader.gif';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
+
+const ReadBlogList = lazy(() => import('../components/ReadBlogList'));
+const CreateBlogPage = lazy(() => import('../components/CreateBlogPage'));
+const EditBlogPage = lazy(() => import('../components/EditBlogPage'));
+const DashboardPage = lazy(() => import('../components/DashboardPage'));
+const LoginPage = lazy(() => import('../components/LoginPage'));
+const ReadBlogPage = lazy(() => import('../components/ReadBlogPage'));
+const NotFoundPage = lazy(() => import('../components/NotFoundPage'));
 
 export const history = createBrowserHistory();
 
 const AppRouter = () => (
-	<Router history={history}>
-		<Switch>
-			<PublicRoute path="/" component={LoginPage} exact={true} />
-			<PrivateRoute path="/dashboard" component={DashboardPage} />
-			<PrivateRoute path="/create" component={CreateBlogPage} />
-			<PrivateRoute path="/edit/:id" component={EditBlogPage} />
-			<PrivateRoute path="/read" component={ReadBlogList} exact={true} />
-			<Route path="/read/:id" component={ReadBlogPage} />
-			<Route component={NotFoundPage} />
-		</Switch>
-	</Router>
+	<Suspense fallback={<img src={loader} className="center small-loader" alt="Loader" />}>
+		<Router history={history}>
+			<React.Fragment>
+				<Switch>
+					<PublicRoute path="/" component={LoginPage} exact={true} />
+					<PrivateRoute path="/dashboard" component={DashboardPage} />
+					<PrivateRoute path="/create" component={CreateBlogPage} />
+					<PrivateRoute path="/edit/:id" component={EditBlogPage} />
+					<PrivateRoute path="/read" component={ReadBlogList} exact={true} />
+					<ReadBlogPage path="/read/:id" />
+					<NotFoundPage />
+				</Switch>
+			</React.Fragment>
+		</Router>
+	</Suspense>
 );
 
 export default AppRouter;
